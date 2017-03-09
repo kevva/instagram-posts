@@ -1,0 +1,43 @@
+{
+  "name": "instagram-posts",
+  "version": "0.0.0",
+  "description": "Get Instagram posts from a user",
+  "license": "MIT",
+  "repository": "kevva/instagram-posts",
+  "author": {
+    "name": "Kevin Martensson",
+    "email": "kevinmartensson@gmail.com",
+    "url": "github.com/kevva"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "api",
+    "hashtag",
+    "instagram",
+    "mention",
+    "posts"
+  ],
+  "dependencies": {
+    "arrify": "^1.0.1",
+    "get-stream": "^3.0.0",
+    "instagram-screen-scrape": "^2.0.0",
+    "limit-size-stream": "^1.0.1",
+    "stream-filter": "^2.1.0",
+    "twitter-text": "^1.14.3"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  },
+  "xo": {
+    "esnext": true
+  }
+}
