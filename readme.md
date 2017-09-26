@@ -6,7 +6,7 @@
 ## Install
 
 ```
-$ npm install --save instagram-posts
+$ npm install instagram-posts
 ```
 
 
@@ -48,6 +48,8 @@ Username to fetch posts from.
 
 #### options
 
+Type: `Object`
+
 ##### count
 
 Type: `number`<br>
@@ -82,4 +84,4 @@ Filter posts depending on if they include defined mentions or not.
 
 ## License
 
-MIT © [Kevin Martensson](https://github.com/kevva)
+MIT © [Kevin Mårtensson](https://github.com/kevva)
