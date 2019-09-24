@@ -26,15 +26,16 @@
 		"posts"
 	],
 	"dependencies": {
-		"arrify": "^1.0.1",
-		"get-stream": "^3.0.0",
-		"instagram-screen-scrape": "^2.0.0",
-		"limit-size-stream": "^1.0.1",
-		"stream-filter": "^2.1.0",
+		"got": "^8.3.2",
 		"twitter-text": "^1.14.3"
 	},
 	"devDependencies": {
-		"ava": "*",
-		"xo": "*"
+		"ava": "^0.25.0",
+		"xo": "^0.20.3"
+	},
+	"xo": {
+		"rules": {
+			"camelcase": "off"
+		}
 	}
 }
