@@ -76,7 +76,7 @@ module.exports = async (username, options = {}) => {
 	const {
 		edge_owner_to_timeline_media: {
 			edges: currentPosts,
-			page_info: {end_cursor: endCursor, has_next_page}
+			page_info: {end_cursor, has_next_page}
 		},
 		id
 	} = await instagramUser(username);
@@ -84,7 +84,7 @@ module.exports = async (username, options = {}) => {
 	const filteredPosts = filterPosts(transformPosts(currentPosts), options);
 
 	if (has_next_page && filteredPosts.length < options.count) {
-		return fetchPosts(id, filteredPosts, endCursor, options);
+		return fetchPosts(id, filteredPosts, end_cursor, options);
 	}
 
 	return filteredPosts.slice(0, options.count);
