@@ -6,6 +6,7 @@ test('fetch posts', async t => {
 
 	t.is(posts.length, 19);
 	t.is(typeof post.likes, 'number');
+	t.regex(post.url, /https:\/\/www.instagram.com\/p\/[\w\d]+/);
 });
 
 test('count option', async t => {

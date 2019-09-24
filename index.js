@@ -31,6 +31,7 @@ const transformPosts = (posts = []) => posts.map(({node}) => ({
 	text: node.edge_media_to_caption.edges.map(({node: {text}}) => text).join(''),
 	time: node.taken_at_timestamp,
 	type: node.is_video ? 'video' : 'image',
+	url: `https://www.instagram.com/p/${node.shortcode}`,
 	username: node.owner.username
 }));
 
