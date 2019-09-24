@@ -15,8 +15,8 @@ $ npm install instagram-posts
 ```js
 const instagramPosts = require('instagram-posts');
 
-instagramPosts('cats_of_instagram').then(posts => {
-	console.log(posts);
+(async () => {
+	console.log(await instagramPosts('cats_of_instagram'));
 	/*
 	[
 		{
@@ -27,18 +27,21 @@ instagramPosts('cats_of_instagram').then(posts => {
 			likes: 809,
 			comments: 10,
 			text: 'This is my post',
-			media: 'https://instagram.fbma1-1.fna.fbcdn.net/t51.2885-15/s640x640/sh0.08/e35/1231231_123123_1231231.jpg'
+			media: 'https://instagram.fbma1-1.fna.fbcdn.net/t51.2885-15/s640x640/sh0.08/e35/1231231_123123_1231231.jpg',
+			…
 		},
-		...
+		…
 	]
 	*/
-});
+})();
 ```
 
 
 ## API
 
-### instagramPosts(username, [options])
+### instagramPosts(username, options?)
+
+Returns a `Promise<Object[]>` with the users posts.
 
 #### username
 
@@ -71,17 +74,12 @@ instagramPosts('cats_of_instagram', {
 
 ##### hashtags
 
-Type: `Array`
+Type: `string[]`
 
 Filter posts depending on if they include defined hashtags or not.
 
 ##### mentions
 
-Type: `Array`
+Type: `string[]`
 
 Filter posts depending on if they include defined mentions or not.
-
-
-## License
-
-MIT © [Kevin Mårtensson](https://github.com/kevva)
