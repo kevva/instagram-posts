@@ -1,27 +1,8 @@
 'use strict';
 const got = require('got');
 const instagramUser = require('instagram-user');
-const {extractHashtags, extractMentions} = require('twitter-text');
 
 const QUERY_HASH = '58b6785bea111c67129decbe6a448951';
-
-const filterPosts = (posts = [], options = {}) => posts.filter(post => {
-	let pass = true;
-
-	if (typeof options.filter === 'function') {
-		pass = options.filter(post);
-	}
-
-	if (pass && Array.isArray(options.hashtags)) {
-		pass = options.hashtags.every(hashtag => extractHashtags(post.text).includes(hashtag));
-	}
-
-	if (pass && Array.isArray(options.mentions)) {
-		pass = options.mentions.every(mention => extractMentions(post.text).includes(mention));
-	}
-
-	return pass;
-});
 
 const transformPosts = (posts = []) => posts.map(({node}) => ({
 	...node,
@@ -57,18 +38,22 @@ const fetchPosts = async (id, posts = [], cursor, options = {}) => {
 		}
 	}).json();
 
-	const filteredPosts = filterPosts(transformPosts(currentPosts), options);
+	let newPosts = transformPosts(currentPosts);
 
-	if (has_next_page && (posts.length + filteredPosts.length) < options.count) {
+	if (typeof options.filter === 'function') {
+		newPosts = newPosts.filter(options.filter);
+	}
+
+	if (has_next_page && (posts.length + newPosts.length) < options.count) {
 		return fetchPosts(
 			id,
-			posts.concat(filteredPosts),
+			posts.concat(newPosts),
 			end_cursor,
 			options
 		);
 	}
 
-	return posts.concat(filteredPosts.slice(0, postsLeft));
+	return posts.concat(newPosts.slice(0, postsLeft));
 };
 
 module.exports = async (username, options = {}) => {
@@ -82,11 +67,15 @@ module.exports = async (username, options = {}) => {
 		id
 	} = await instagramUser(username);
 
-	const filteredPosts = filterPosts(transformPosts(currentPosts), options);
+	let newPosts = transformPosts(currentPosts);
 
-	if (has_next_page && filteredPosts.length < options.count) {
-		return fetchPosts(id, filteredPosts, end_cursor, options);
+	if (typeof options.filter === 'function') {
+		newPosts = newPosts.filter(options.filter);
 	}
 
-	return filteredPosts.slice(0, options.count);
+	if (has_next_page && newPosts.length < options.count) {
+		return fetchPosts(id, newPosts, end_cursor, options);
+	}
+
+	return newPosts.slice(0, options.count);
 };

@@ -27,8 +27,7 @@
 	],
 	"dependencies": {
 		"got": "^10.0.0-alpha.2.2",
-		"instagram-user": "^2.0.0",
-		"twitter-text": "^3.0.0"
+		"instagram-user": "^2.0.0"
 	},
 	"devDependencies": {
 		"ava": "^2.4.0",

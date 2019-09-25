@@ -71,15 +71,3 @@ instagramPosts('cats_of_instagram', {
 	filter: data => data.likes > 500
 });
 ```
-
-##### hashtags
-
-Type: `string[]`
-
-Filter posts depending on if they include defined hashtags or not.
-
-##### mentions
-
-Type: `string[]`
-
-Filter posts depending on if they include defined mentions or not.
