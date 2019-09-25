@@ -12,3 +12,12 @@ test('fetch posts', async t => {
 test('count option', async t => {
 	t.is((await instagramPosts('cats_of_instagram', {count: 40})).length, 40);
 });
+
+test('filter option', async t => {
+	const [post] = await instagramPosts('cats_of_instagram', {
+		count: 1,
+		filter: post => post.shortcode === 'B2viL0elqAe'
+	});
+
+	t.true(post.likes > 500);
+});
